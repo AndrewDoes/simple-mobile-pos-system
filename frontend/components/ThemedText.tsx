@@ -1,6 +1,6 @@
 import { Colors, Fonts } from '@/constants/theme';
 import React from 'react'
-import { StyleProp, Text, TextProps, TextStyle, useColorScheme } from 'react-native';
+import { StyleProp, StyleSheet, Text, TextProps, TextStyle, useColorScheme } from 'react-native';
 type Props = TextProps & {
     style?: StyleProp<TextStyle>
     title?: boolean
@@ -16,7 +16,7 @@ const ThemedText = ({ title = false, style, ...props }: Props) => {
     )
 }
 
-export const styles = {
+const styles = StyleSheet.create({
     title: {
         fontSize: 32,
         textAlign: 'center' as const,
@@ -27,6 +27,6 @@ export const styles = {
         textAlign: 'center' as const,
         fontWeight: 'light' as const
     }
-};
+});
 
 export default ThemedText
