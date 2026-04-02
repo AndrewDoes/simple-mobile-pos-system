@@ -20,7 +20,7 @@ export default function LandingPage() {
 
     return (
         <ThemedView style={styles.container}>
-            <ThemedButton onPress={checkSession}>
+            <ThemedButton style={{ width: 200 }} onPress={checkSession}>
                 <ThemedLogo style={styles.logo} />
             </ThemedButton>
             <ThemedText title={true}>
