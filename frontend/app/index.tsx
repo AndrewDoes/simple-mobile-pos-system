@@ -5,21 +5,31 @@ import { Colors } from '../constants/theme';
 import { Image } from 'expo-image';
 import ThemedLogo from '@/components/ThemedLogo';
 import ThemedText from '@/components/ThemedText';
+import ThemedButton from '@/components/ThemedButton';
+import { useRouter } from 'expo-router';
+import ThemedView from '@/components/ThemedView';
 
 export default function LandingPage() {
+    const router = useRouter();
     const colorScheme = useColorScheme() ?? 'light';
     const theme = Colors[colorScheme as keyof typeof Colors];
 
+    const checkSession = () => {
+        router.push('/(auth)/login')
+    }
+
     return (
-        <View style={styles.container}>
-            <ThemedLogo style={styles.logo} />
+        <ThemedView style={styles.container}>
+            <ThemedButton onPress={checkSession}>
+                <ThemedLogo style={styles.logo} />
+            </ThemedButton>
             <ThemedText title={true}>
                 Simple POS
             </ThemedText>
-            <ThemedText style={{ opacity: 1, marginBottom: 20 }}>
-                {`Tap the logo to enter`}
+            <ThemedText>
+                Press the logo to get started!
             </ThemedText>
-        </View>
+        </ThemedView>
     )
 }
 
