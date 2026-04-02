@@ -56,8 +56,20 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateProductHandler).Assembly));
 
 builder.Services.AddValidatorsFromAssembly(typeof(CreateProductValidator).Assembly);
-var app = builder.Build();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMobileApp",
+        policy =>
+        {
+            policy.AllowAnyOrigin()   // For dev, allow any IP (Your Phone)
+                  .AllowAnyHeader()   // Allow Content-Type, Authorization, etc.
+                  .AllowAnyMethod();  // Allow GET, POST, PUT, DELETE
+        });
+});
+var app = builder.Build();
+app.UseRouting();
+app.UseCors("AllowMobileApp");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
