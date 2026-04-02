@@ -8,7 +8,7 @@ import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback, useColorScheme, V
 import { useRouter } from 'expo-router';
 
 const register = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const colorScheme = useColorScheme() ?? 'light';
@@ -16,7 +16,7 @@ const register = () => {
     const theme = Colors[colorScheme as keyof typeof Colors];
 
     const handleSubmit = () => {
-        console.log('Username:', username);
+        console.log('Email:', email);
         console.log('Password:', password);
         console.log('Confirm Password:', confirmPassword);
     }
@@ -25,11 +25,11 @@ const register = () => {
             <ThemedView safe={true} style={[styles.container, { backgroundColor: theme.background, padding: 20 }]}>
                 <ThemedText title={true}>Register</ThemedText>
                 <ThemedText style={{ opacity: 0.7 }}>Create a new account</ThemedText>
-                <ThemedText style={{ width: '80%', textAlign: 'left' }} >Username: </ThemedText>
+                <ThemedText style={{ width: '80%', textAlign: 'left' }} >Email: </ThemedText>
                 <ThemedTextInput
-                    placeholder='Username'
-                    value={username}
-                    onChangeText={setUsername}
+                    placeholder='Email'
+                    value={email}
+                    onChangeText={setEmail}
                     style={{ marginBottom: 20 }}
                 />
                 <ThemedText style={{ width: '80%', textAlign: 'left' }}>Password: </ThemedText>

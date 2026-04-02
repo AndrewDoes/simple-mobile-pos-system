@@ -5,18 +5,43 @@ import ThemedView from '@/components/ThemedView';
 import { Colors } from '@/constants/theme';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react'
-import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback, useColorScheme, View, ViewStyle } from 'react-native'
+import { Alert, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, useColorScheme, View, ViewStyle } from 'react-native'
+import { authApi } from '../services/api';
 
 const login = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const colorScheme = useColorScheme() ?? 'light';
     const theme = Colors[colorScheme as keyof typeof Colors];
 
-    const handleSubmit = () => {
-        console.log('Username:', username);
+    const handleSubmit = async () => {
+        console.log('Email:', email);
         console.log('Password:', password);
+
+        if (!email || !password) {
+            Alert.alert("Error", "Please fill in all fields.");
+            return;
+        }
+
+        setLoading(true);
+        try {
+            // 2. Call your ASP.NET Backend
+            const response = await authApi.login({ email, password });
+
+            console.log("Login Success!", response);
+
+            // 3. TODO: Save response.token to SecureStore here
+
+            // 4. Navigate to the Dashboard
+            router.replace('/register'); // Replace with your actual dashboard route
+        } catch (error: any) {
+            // This catches Network errors, 401s, 500s, etc.
+            Alert.alert("Login Failed", error.message || "Check your connection/IP.");
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -24,11 +49,11 @@ const login = () => {
             <ThemedView safe={true} style={[styles.container, { backgroundColor: theme.background, padding: 20 }]}>
                 <ThemedText title={true}>Login</ThemedText>
                 <ThemedText style={{ opacity: 0.7 }}>Welcome Back to Simplify POS</ThemedText>
-                <ThemedText style={{ width: '80%', textAlign: 'left' }} >Username: </ThemedText>
+                <ThemedText style={{ width: '80%', textAlign: 'left' }} >Email: </ThemedText>
                 <ThemedTextInput
-                    placeholder='Username'
-                    value={username}
-                    onChangeText={setUsername}
+                    placeholder='Email'
+                    value={email}
+                    onChangeText={setEmail}
                     style={{ marginBottom: 20 }}
                 />
                 <ThemedText style={{ width: '80%', textAlign: 'left' }}>Password: </ThemedText>
