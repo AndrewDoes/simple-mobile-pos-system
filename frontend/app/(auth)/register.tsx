@@ -4,8 +4,9 @@ import ThemedText from '@/components/ThemedText';
 import ThemedTextInput from '@/components/ThemedTextInput';
 import ThemedView from '@/components/ThemedView';
 import { Colors } from '@/constants/theme';
-import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback, useColorScheme, View, ViewStyle } from 'react-native'
+import { Alert, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, useColorScheme, View, ViewStyle } from 'react-native'
 import { useRouter } from 'expo-router';
+import { authApi } from '../services/api';
 
 const register = () => {
     const [email, setEmail] = useState('');
@@ -15,10 +16,23 @@ const register = () => {
     const router = useRouter();
     const theme = Colors[colorScheme as keyof typeof Colors];
 
-    const handleSubmit = () => {
-        console.log('Email:', email);
-        console.log('Password:', password);
-        console.log('Confirm Password:', confirmPassword);
+    const handleSubmit = async () => {
+        if (!email || !password || !confirmPassword) {
+            Alert.alert("Error", "Please fill in all fields.");
+            return;
+        }
+        if (password !== confirmPassword) {
+            Alert.alert("Error", "Passwords do not match.");
+            return;
+        }
+
+        try {
+            const response = await authApi.register({ email, password, confirmPassword });
+            console.log("Registration Success!", response);
+            router.replace('/login'); // Navigate to login after successful registration
+        } catch (error: any) {
+            Alert.alert("Registration Failed", error.message || "Check your connection/IP.");
+        }
     }
     return (
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
