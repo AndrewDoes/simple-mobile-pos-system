@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Commons/Commons.csproj" />
+  <Project Path="Contracts/Contracts.csproj" />
+  <Project Path="Entities/Entities.csproj" />
+  <Project Path="WebAPI/WebAPI.csproj" />
+</Solution>
