@@ -17,9 +17,6 @@ const login = () => {
     const theme = Colors[colorScheme as keyof typeof Colors];
 
     const handleSubmit = async () => {
-        console.log('Email:', email);
-        console.log('Password:', password);
-
         if (!email || !password) {
             Alert.alert("Error", "Please fill in all fields.");
             return;
@@ -68,7 +65,7 @@ const login = () => {
                     width: '80%',
                     backgroundColor: theme.tint
                 }} onPress={handleSubmit}>
-                    <Text style={{ color: theme.background, fontSize: 16, marginHorizontal: 40, marginVertical: 10 }}>Register</Text>
+                    <Text style={{ color: theme.background, fontSize: 16, marginHorizontal: 40, marginVertical: 10 }}>Login</Text>
                 </ThemedButton>
 
                 <ThemedButton style={{ display: 'flex', marginTop: 20 }} onPress={() => router.push('/register')}>
