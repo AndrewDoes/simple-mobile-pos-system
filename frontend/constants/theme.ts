@@ -5,28 +5,38 @@
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const tintColorLight = '#2563EB'; // Professional "Action" Blue
+const tintColorDark = '#60A5FA';  // Lighter blue for dark mode visibility
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    title: '#1E293B',
+    text: '#1E293B',        // Slate Dark (Better than pure black)
+    navBackground: '#dbdbdb',
+    background: '#F8FAFC',  // Light Grey-Blue background
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    icon: '#64748B',        // Muted Slate for inactive icons
+    tabIconDefault: '#64748B',
     tabIconSelected: tintColorLight,
+    // Adding POS specific functional colors
+    success: '#10B981',
+    danger: '#EF4444',
+    border: '#E2E8F0',
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    title: '#F1F5F9',
+    text: '#F1F5F9',        // Soft white
+    navBackground: '#2b2b2b',
+    background: '#0F172A',  // Deep Navy (Professional Dark Mode)
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    icon: '#94A3B8',
+    tabIconDefault: '#94A3B8',
     tabIconSelected: tintColorDark,
+    success: '#34D399',
+    danger: '#F87171',
+    border: '#1E293B',
   },
 };
-
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */
