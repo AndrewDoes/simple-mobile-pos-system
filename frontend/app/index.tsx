@@ -8,6 +8,7 @@ import ThemedText from '@/components/ThemedText';
 import ThemedButton from '@/components/ThemedButton';
 import { useRouter } from 'expo-router';
 import ThemedView from '@/components/ThemedView';
+import { UserProvider } from './contexts/UserContext';
 
 export default function LandingPage() {
     const router = useRouter();

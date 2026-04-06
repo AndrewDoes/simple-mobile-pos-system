@@ -7,6 +7,7 @@ import { useRouter } from 'expo-router';
 import React, { useState } from 'react'
 import { Alert, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, useColorScheme, View, ViewStyle } from 'react-native'
 import { authApi } from '../services/api';
+import { useUser } from '../hooks/UseUser';
 
 const login = () => {
     const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ const login = () => {
     const router = useRouter();
     const colorScheme = useColorScheme() ?? 'light';
     const theme = Colors[colorScheme as keyof typeof Colors];
+    const { saveUser } = useUser();
 
     const handleSubmit = async () => {
         if (!email || !password) {
@@ -24,17 +26,17 @@ const login = () => {
 
         setLoading(true);
         try {
-            // 2. Call your ASP.NET Backend
             const response = await authApi.login({ email, password });
+            if (response.token) {
+                await saveUser({
+                    email: email, // admin@gmail.com [cite: 105]
+                    token: response.token
+                });
+                console.log("Login Success!", response);
+            }
 
-            console.log("Login Success!", response);
-
-            // 3. TODO: Save response.token to SecureStore here
-
-            // 4. Navigate to the Dashboard
-            router.replace('/register'); // Replace with your actual dashboard route
+            router.replace('/product');
         } catch (error: any) {
-            // This catches Network errors, 401s, 500s, etc.
             Alert.alert("Login Failed", error.message || "Check your connection/IP.");
         } finally {
             setLoading(false);
