@@ -8,6 +8,6 @@ namespace Contracts.Requests.Product
 {
     public class GetAllProductsRequest : IRequest<List<GetProductResponse>>
     {
-
+        public required String Email { get; set; }
     }
 }

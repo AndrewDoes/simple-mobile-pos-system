@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -45,7 +45,7 @@ public class LoginHandler : IRequestHandler<LoginRequest, LoginResponse>
         };
 
         // 4. Generate the Signing Key from User Secrets
-        var jwtKey = _configuration["Jwt:Key"] ?? "DEVELOPMENT_ONLY_KEY_32_CHARS_MINIMUM";
+        var jwtKey = _configuration["Jwt:Key"] ?? "THIS_IS_A_TEMPORARY_DEVELOPMENT_KEY_32_CHARS_LONG";
         var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
 
         // 5. Create the Token

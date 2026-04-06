@@ -21,6 +21,7 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
+builder.Services.AddAuthorization();
 
 builder.Services.AddOpenApi();
 if (builder.Environment.IsDevelopment())
@@ -35,7 +36,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "THIS_IS_A_TEMPORARY_DEVELOPMENT_KEY_32_CHARS_LONG";
-var key = Encoding.ASCII.GetBytes(jwtKey);
+var key = Encoding.UTF8.GetBytes(jwtKey);
 
 builder.Services.AddAuthentication(options =>
 {

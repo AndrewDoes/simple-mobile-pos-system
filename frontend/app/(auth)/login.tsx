@@ -47,15 +47,15 @@ const login = () => {
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
             <ThemedView safe={true} style={[styles.container, { backgroundColor: theme.background, padding: 20 }]}>
                 <ThemedText title={true}>Login</ThemedText>
-                <ThemedText style={{ opacity: 0.7 }}>Welcome Back to Simplify POS</ThemedText>
-                <ThemedText style={{ width: '80%', textAlign: 'left' }} >Email: </ThemedText>
+                <ThemedText style={{ opacity: 0.7, marginVertical: 10 }}>Welcome Back to Simplify POS</ThemedText>
+                <ThemedText style={{ width: '80%', textAlign: 'left', marginTop: 20, marginBottom: 5 }} >Email: </ThemedText>
                 <ThemedTextInput
                     placeholder='Email'
                     value={email}
                     onChangeText={setEmail}
                     style={{ marginBottom: 20 }}
                 />
-                <ThemedText style={{ width: '80%', textAlign: 'left' }}>Password: </ThemedText>
+                <ThemedText style={{ width: '80%', textAlign: 'left', marginTop: 10, marginBottom: 5 }}>Password: </ThemedText>
                 <ThemedTextInput
                     placeholder='Password'
                     value={password}

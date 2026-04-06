@@ -58,3 +58,18 @@ export const authApi = {
             body: JSON.stringify(userData),
         }),
 };
+
+export const productApi = {
+    getAll: (token?: string) =>
+        apiRequest('/product/all', {
+            method: 'GET',
+            token,
+        }),
+
+    create: (productData: object, token?: string) =>
+        apiRequest('/product/create', {
+            method: 'POST',
+            body: JSON.stringify(productData),
+            token,
+        }),
+}

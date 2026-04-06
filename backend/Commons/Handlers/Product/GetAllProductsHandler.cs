@@ -1,4 +1,4 @@
-﻿using Contracts.Requests.Product;
+using Contracts.Requests.Product;
 using Contracts.Responses.Product;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +26,7 @@ namespace Commons.Handlers.Product
             _logger.LogInformation("Fetching all products from the database...");
             var products = await _db.Products
                 .AsNoTracking()
+                .Where(p => p.CreatedBy == request.Email)
                 .Select(p => new GetProductResponse
                 {
                     Id = p.Id,
@@ -34,7 +35,7 @@ namespace Commons.Handlers.Product
                     Quantity = p.Quantity
                 })
                 .ToListAsync();
-            Log.Information("Successfully retrieved {Count} products.", products.Count);
+            Log.Information("Successfully retrieved {Count} products for user {UserEmail}.", products.Count, request.Email);
 
             return products;
         }

@@ -1,4 +1,4 @@
-﻿using Contracts.Requests.Product;
+using Contracts.Requests.Product;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -51,8 +51,9 @@ namespace WebAPI.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
-            var response = await _mediator.Send(new GetAllProductsRequest());
-            Log.Information("Inventory list retrieved by {User}", User.Identity?.Name);
+            var userEmail = User.Identity?.Name ?? "Unknown";
+            var response = await _mediator.Send(new GetAllProductsRequest { Email = userEmail });
+            Log.Information("Inventory list retrieved by {User}", userEmail);
             return Ok(response);
         }
     }

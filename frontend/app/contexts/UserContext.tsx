@@ -47,6 +47,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const logout = async () => {
         setUser(null);
         await SecureStore.deleteItemAsync('user_session');
+        router.replace('/');
     };
 
     return (

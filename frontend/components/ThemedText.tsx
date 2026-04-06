@@ -12,7 +12,7 @@ const ThemedText = ({ title = false, style, ...props }: Props) => {
 
     const textColor = title ? theme.title : theme.text;
     return (
-        <Text style={[title ? styles.title : styles.text, style, { color: textColor, marginHorizontal: 40, marginVertical: 10 }]} {...props} />
+        <Text style={[title ? styles.title : styles.text, { color: textColor }, style]} {...props} />
     )
 }
 
